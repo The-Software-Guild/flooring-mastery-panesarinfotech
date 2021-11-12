@@ -50,9 +50,17 @@ public class FlooringMasteryServiceImpl implements FlooringMasteryService {
             throws FlooringMasteryNoOrderException, FlooringMasteryPersistenceException, FlooringMasteryInvalidDateException {
         return orderDao.getOrderListByDate(date);
     }
-
+//    @Override
+//    public void addOrder(Order order){
+//    System.out.println("DONE");
+//    }
+//    
+//    @Override
+//    public void hello(){
+//    System.out.print("Hello, I am Jagwant Singh - TESTER");}
+    
     @Override
-    public void addOrder(Order order) // Order Date, Customer Name, State, Product Type, Area.
+    public Order addOrder(Order order) // Order Date, Customer Name, State, Product Type, Area.
          {
 System.out.println("1");
         // validateOrder(order);
@@ -92,18 +100,18 @@ System.out.println("4");
         order.setTotalTax(totalTaxCost);
         order.setTotalCost(totalCost);
 System.out.println("5");
-//        try {
-////            return orderDao.addOrder(order);
-//        } catch (FlooringMasteryPersistenceException ex) {
-//            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (FlooringMasteryNoOrderException ex) {
-//            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (FlooringMasteryInvalidDateException ex) {
-//            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return null;
+        try {
+            return orderDao.addOrder(order);
+        } catch (FlooringMasteryPersistenceException ex) {
+            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FlooringMasteryNoOrderException ex) {
+            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FlooringMasteryInvalidDateException ex) {
+            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override // done

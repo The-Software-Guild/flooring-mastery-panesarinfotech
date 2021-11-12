@@ -42,7 +42,7 @@ public class FlooringMasteryController {
         while (keepGoing) {
 
             menuSelect = menu();
-            try{
+//            try{
                 
             
             switch (menuSelect) {
@@ -67,9 +67,9 @@ public class FlooringMasteryController {
                 default:
                     view.genericText("Input one of the above choices, please.");
             }
-            }catch(Exception exception){
-                System.out.println("Unexpected error has Occured. Returning you to main menu.");
-            }
+//            }catch(Exception exception){
+//                System.out.println("Unexpected error has Occured. Returning you to main menu. XXX");
+//            }
             
         }
     }
@@ -84,7 +84,7 @@ public class FlooringMasteryController {
         view.addOrderBanner();
         Order newOrder = view.newOrderInfo();
         service.addOrder(newOrder);
-
+        
         System.out.println("C-2" + newOrder.getCustomerName()+newOrder.getProductType()+newOrder.getOrderDate()+newOrder.getStateName());
         view.genericSuccessBanner();
     }

@@ -13,6 +13,8 @@ import com.panesarinfotech.flooringmastery.ui.FlooringMasteryView;
 import com.panesarinfotech.flooringmastery.ui.UserIO;
 import com.panesarinfotech.flooringmastery.ui.UserIOImpl;
 import java.io.IOException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -32,13 +34,17 @@ public class app {
             FlooringMasteryInvalidAreaInputException, FlooringMasteryInvalidStateNameException, FlooringMasteryInvalidCustomerNameException,
             FlooringMasteryInvalidProductNameException, IOException  {
         
-        UserIO myIo = new UserIOImpl();
-        FlooringMasteryView view = new FlooringMasteryView(myIo) ;
-        FlooringMasteryService service = null;
-        FlooringMasteryController controller;
-        controller = new FlooringMasteryController(view,service);
-        controller.run();
+//        UserIO myIo = new UserIOImpl();
+//        FlooringMasteryView view = new FlooringMasteryView(myIo) ;
+//        FlooringMasteryService service = null;
+//        FlooringMasteryController controller;
+//        controller = new FlooringMasteryController(view,service);
+//        controller.run();
         
         //FlooringMasteryController controller = new FlooringMasteryController();
+        
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        FlooringMasteryController controller = ctx.getBean("controller", FlooringMasteryController.class);
+        controller.run(); 
     }
 }

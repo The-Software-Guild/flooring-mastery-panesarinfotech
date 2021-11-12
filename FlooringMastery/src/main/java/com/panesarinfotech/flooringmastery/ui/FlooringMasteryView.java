@@ -58,11 +58,12 @@ public class FlooringMasteryView {
                 run = false;
             }
         }
+//        System.out.print("ORDER DETAILS -  VIEW : " +order.getCustomerName()+order.getOrderDate()+order.getProductType()+order.getStateName());
         return order;
     }
 
     public String listOfOrdersByDatePrompt() {
-        return io.readString("Please enter the date of the orders you'd like to view/select");
+        return io.readString("Please enter the date of the orders you'd like to view/select (in MM-dd-yyyy Format)");
     }
 
     public void listOfOrdersByDate(List<Order> orderList) {
@@ -124,7 +125,7 @@ public class FlooringMasteryView {
     }
 
     public String removeOrderGenericString() {
-        return io.readString("Enter the date of the order you wish to remove.");
+        return io.readString("Enter the date of the order you wish to remove. (in MM-dd-yyyy Format)");
     }
 
     public int removeOrderGenericInt() {

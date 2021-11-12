@@ -28,7 +28,7 @@ public interface FlooringMasteryService {
     List<Order> displayOrdersByDate(String date) throws FlooringMasteryNoOrderException, FlooringMasteryPersistenceException,
             FlooringMasteryInvalidDateException;
 
-    void addOrder(Order order) throws FlooringMasteryPersistenceException, FlooringMasteryNoOrderException, IOException,
+    Order addOrder(Order order) throws FlooringMasteryPersistenceException, FlooringMasteryNoOrderException, IOException,
             FlooringMasteryInvalidDateException, FlooringMasteryInvalidAreaInputException,
             FlooringMasteryInvalidStateNameException, FlooringMasteryInvalidCustomerNameException,
             FlooringMasteryInvalidProductNameException;
@@ -59,6 +59,8 @@ public interface FlooringMasteryService {
             FlooringMasteryNoOrderException, FlooringMasteryInvalidDateException;
 
     List<String> getFileNames();
+    
+   // void hello();
 
 }
 
