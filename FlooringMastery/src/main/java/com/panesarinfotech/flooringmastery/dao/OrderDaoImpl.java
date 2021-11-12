@@ -242,7 +242,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<String> getFileNames() {
         List<String> myList = new ArrayList<>();
-        File dir = new File("C:/Repo/online-Java-2019-DevonTD/Summatives/M5 Summative/FlooringMastery");
+        File dir = new File("Users/panesar/Documents/study_java/Repos/flooring-mastery-panesarinfotech/");
         FilenameFilter filter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {

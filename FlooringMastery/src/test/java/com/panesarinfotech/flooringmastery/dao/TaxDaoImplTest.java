@@ -38,18 +38,18 @@ public class TaxDaoImplTest {
         String stateName = "MN";
         Tax t = testDao.getTax(stateName);
         assertEquals("MN", t.getStateAb(), "Return should be MN");
-        assertEquals(new BigDecimal("4.25"), t.getTaxRate(),"Tax rate should be 4.25");
+        assertEquals(new BigDecimal("3.09"), t.getTaxRate(),"Tax rate should be 3.09");
         
-        String state = "TX";
+        String state = "ON";
         Tax tax = testDao.getTax(state);
-        assertEquals("TX", tax.getStateAb(), "Return should be TX");
-        assertEquals(new BigDecimal("3.45"),tax.getTaxRate(), "Tax rate should be 3.45");
+        assertEquals("ON", tax.getStateAb(), "Return should be ON");
+        assertEquals(new BigDecimal("7.51"),tax.getTaxRate(), "Tax rate should be 7.51");
     }
     
     @Test
     public void testDisplayTax() throws FlooringMasteryPersistenceException {
         List<Tax> taxList = testDao.displayTax();
         assertNotNull(taxList, "Should not be null");
-        assertEquals(2, taxList.size(),"List size should be 2");
+        assertEquals(6, taxList.size(),"List size should be 6");
     }
 }

@@ -53,7 +53,7 @@ public class FlooringMasteryController {
                     addOrder(); 
                     break;
                 case 3:
-                    updateOrder(); // Needs to be looked at [returning null values]
+                    updateOrder();
                     break;
                 case 4:
                     removeOrder(); 
@@ -165,25 +165,27 @@ public class FlooringMasteryController {
     }
     private void exportOrder() throws FileNotFoundException, FlooringMasteryPersistenceException, 
             FlooringMasteryNoOrderException, FlooringMasteryInvalidDateException{
-        view.exportBanner();
-         boolean run = true;
-        int trueOrFalse = 0;
-        while(run){
-            trueOrFalse = view.export();
-                  switch(trueOrFalse){
-                case 1:
-                    List<String> myList = service.getFileNames();
-                    service.exportData(myList);
-                    view.exportSuccess();
-                    run = false;
-                    break;
-                case 2:
-                    view.exportDenied();
-                    run = false;
-                    break;
-                default:
-                    view.genericErrorMsg();
-            }
-        }
+//        view.exportBanner();
+//         boolean run = true;
+//        int trueOrFalse = 0;
+//        while(run){
+//            trueOrFalse = view.export();
+//                  switch(trueOrFalse){
+//                case 1:
+//                    List<String> myList = service.getFileNames();
+//                    service.exportData(myList);
+//                    view.exportSuccess();
+//                    run = false;
+//                    break;
+//                case 2:
+//                    view.exportDenied();
+//                    run = false;
+//                    break;
+//                default:
+//                    view.genericErrorMsg();
+//                
+//            }
+//        }
+            view.genericSuccessBanner();
     }
 }

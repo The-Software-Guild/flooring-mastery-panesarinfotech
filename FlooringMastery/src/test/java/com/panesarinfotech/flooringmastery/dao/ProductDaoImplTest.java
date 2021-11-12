@@ -47,6 +47,6 @@ public class ProductDaoImplTest {
             throws FlooringMasteryPersistenceException {
         List<Product> availableItems = testDao.displayProduct();
         assertNotNull(availableItems, "List should not be null");
-        assertEquals(2, availableItems.size(), "Should equal 2");
+        assertEquals(5, availableItems.size(), "Should equal 5");
     }
 }
