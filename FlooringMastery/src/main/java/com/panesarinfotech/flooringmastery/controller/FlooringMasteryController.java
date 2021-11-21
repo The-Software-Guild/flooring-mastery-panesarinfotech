@@ -13,6 +13,8 @@ import com.panesarinfotech.flooringmastery.dao.FlooringMasteryInvalidStateNameEx
 import com.panesarinfotech.flooringmastery.dao.FlooringMasteryNoOrderException;
 import com.panesarinfotech.flooringmastery.dao.FlooringMasteryPersistenceException;
 import com.panesarinfotech.flooringmastery.dto.Order;
+import com.panesarinfotech.flooringmastery.dto.Product;
+import com.panesarinfotech.flooringmastery.dto.Tax;
 import com.panesarinfotech.flooringmastery.service.FlooringMasteryService;
 import com.panesarinfotech.flooringmastery.ui.FlooringMasteryView;
 import java.io.FileNotFoundException;
@@ -82,10 +84,12 @@ public class FlooringMasteryController {
             FlooringMasteryInvalidDateException, FlooringMasteryInvalidAreaInputException, FlooringMasteryInvalidStateNameException, 
             FlooringMasteryInvalidCustomerNameException, FlooringMasteryInvalidProductNameException  {
         view.addOrderBanner();
-        Order newOrder = view.newOrderInfo();
+        List<Product> products = service.getProductList();
+        List<Tax> taxs = service.getTaxList();
+
+        Order newOrder = view.newOrderInfo(products,taxs);
         service.addOrder(newOrder);
-        
-        System.out.println("C-2" + newOrder.getCustomerName()+newOrder.getProductType()+newOrder.getOrderDate()+newOrder.getStateName());
+        System.out.println("ORDER DETAILS: - " + newOrder.getCustomerName()+" - "+newOrder.getProductType()+" - "+newOrder.getOrderDate()+" - "+newOrder.getStateName());
         view.genericSuccessBanner();
     }
 

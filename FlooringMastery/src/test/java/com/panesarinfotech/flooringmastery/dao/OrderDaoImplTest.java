@@ -62,16 +62,16 @@ public class OrderDaoImplTest {
         // Get object from dao to compare results
         Order testOrder = testDao.getOrderByDate(orderOne.getOrderDate(), 1);
 
-        assertEquals(orderOne.getCustomerName(), testOrder.getCustomerName(), "Jagwant");
+        assertEquals(orderOne.getCustomerName(), testOrder.getCustomerName(), "The Name doesn't Match");
         assertEquals(orderOne.getOrderNumber(), testOrder.getOrderNumber(), 1);
-        assertEquals(orderOne.getArea(), testOrder.getArea(), "400");
+        assertEquals(orderOne.getArea(), testOrder.getArea(), "Area doesn't match");
         assertEquals(orderOne.getOrderDate(), testOrder.getOrderDate(), "04-10-2022");
         assertEquals(orderOne.getProductType(), testOrder.getProductType(), "Carpet");
         
 
     }
 
-     @Test 
+//     @Test 
     public void testGetOrderListByDate() throws FlooringMasteryNoOrderException,
             FlooringMasteryPersistenceException, IOException, FlooringMasteryInvalidDateException {
         // Create object
@@ -107,11 +107,11 @@ public class OrderDaoImplTest {
         List<Order> myList = testDao.getOrderListByDate("04-05-2022");
 
         assertNotNull(myList, "Should not be NULL");
-        assertEquals(3, myList.size(), "List size should be 2");
+        assertEquals(3, myList.size(), "List size should be 3");
 
     }
 
-//    @Test
+    @Test
     public void testEditOrder() throws FlooringMasteryPersistenceException, FlooringMasteryNoOrderException, IOException,
             FlooringMasteryInvalidDateException {
         // Create object
@@ -138,7 +138,7 @@ public class OrderDaoImplTest {
 
         Order newOrder = testDao.getOrderByDate(oldOrder.getOrderDate(), oldOrder.getOrderNumber());
 
-        assertEquals(updated.getCustomerName(), newOrder.getCustomerName(), "Name should be Billy");
+        assertEquals(updated.getCustomerName(), newOrder.getCustomerName(), "Name should be Sandeep");
         assertEquals(updated.getProductType(), newOrder.getProductType(), "Should be Wood");
         assertEquals(updated.getStateName(), newOrder.getStateName(), "Should be TX");
         assertEquals(updated.getArea(), newOrder.getArea(), "Should be 120");

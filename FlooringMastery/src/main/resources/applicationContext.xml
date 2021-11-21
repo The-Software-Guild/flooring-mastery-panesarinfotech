@@ -17,15 +17,15 @@
 
     <!-- Bean definitions go here -->
     <bean id="userIO" class="com.panesarinfotech.flooringmastery.ui.UserIOImpl"/>
+    <bean id="productDao" class="com.panesarinfotech.flooringmastery.dao.ProductDaoImpl"/>
+    <bean id="taxDao" class="com.panesarinfotech.flooringmastery.dao.TaxDaoImpl"/>
+    
     <bean id="view" class="com.panesarinfotech.flooringmastery.ui.FlooringMasteryView">
         <constructor-arg ref="userIO"/>
     </bean>
     
     <bean id="orderDao" class="com.panesarinfotech.flooringmastery.dao.OrderDaoImpl"/>
-    <bean id="productDao" class="com.panesarinfotech.flooringmastery.dao.ProductDaoImpl"/>
-    <bean id="taxDao" class="com.panesarinfotech.flooringmastery.dao.TaxDaoImpl"/>
     <bean id="exportDao" class="com.panesarinfotech.flooringmastery.dao.ExportDataDaoImpl"/>
-
     <bean id="serviceLayer" class="com.panesarinfotech.flooringmastery.service.FlooringMasteryServiceImpl">
         <constructor-arg ref="orderDao"/>
         <constructor-arg ref="productDao"/>

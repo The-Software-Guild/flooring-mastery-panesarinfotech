@@ -44,7 +44,25 @@ public class FlooringMasteryServiceImpl implements FlooringMasteryService {
         this.taxDao = taxDao;
         this.dataDao = dataDao;
     }
-
+    public List<Product> getProductList(){
+        List<Product> productList = null;
+        try {
+            productList = productDao.displayProduct();
+        } catch (FlooringMasteryPersistenceException ex) {
+            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return productList;
+    }
+    public List<Tax> getTaxList(){
+         List<Tax> taxList = null;
+        try {
+            taxList = taxDao.displayTax();
+        } catch (FlooringMasteryPersistenceException ex) {
+            Logger.getLogger(FlooringMasteryServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return taxList;
+    }
+    
     @Override // done
     public List<Order> displayOrdersByDate(String date)
             throws FlooringMasteryNoOrderException, FlooringMasteryPersistenceException, FlooringMasteryInvalidDateException {
@@ -62,11 +80,11 @@ public class FlooringMasteryServiceImpl implements FlooringMasteryService {
     @Override
     public Order addOrder(Order order) // Order Date, Customer Name, State, Product Type, Area.
          {
-System.out.println("1");
+
         // validateOrder(order);
         Tax tax = new Tax();
         Product product = new Product();
-System.out.println("2");
+
         // Verification
         try {
             tax.setStateAb(order.getStateName().toUpperCase());
@@ -89,17 +107,17 @@ System.out.println("2");
             order.setCostPerSqFt(product.getCostPerSqFt()); // CostPerSq for product in particular set
             order.setLaborCostPerSqFt(product.getLabourCostPerSqFt()); // LaborCostPerSq for product in particular set
         }
-System.out.println("3");
+
         BigDecimal matCost = materialCost(order.getArea(), order.getCostPerSqFt());
         BigDecimal labourCost = laborCost(order.getArea(), order.getLaborCostPerSqFt());
         BigDecimal totalTaxCost = tax(matCost, labourCost, order);
         BigDecimal totalCost = total(matCost, labourCost, totalTaxCost);
-System.out.println("4");
+
         order.setMaterialCost(matCost);
         order.setLaborCost(labourCost);
         order.setTotalTax(totalTaxCost);
         order.setTotalCost(totalCost);
-System.out.println("5");
+
         try {
             return orderDao.addOrder(order);
         } catch (FlooringMasteryPersistenceException ex) {

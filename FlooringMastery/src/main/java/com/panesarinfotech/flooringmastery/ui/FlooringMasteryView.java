@@ -5,11 +5,18 @@
  */
 package com.panesarinfotech.flooringmastery.ui;
 
+import com.panesarinfotech.flooringmastery.dao.FlooringMasteryPersistenceException;
+import com.panesarinfotech.flooringmastery.dao.ProductDaoImpl;
+import com.panesarinfotech.flooringmastery.dao.TaxDaoImpl;
 import com.panesarinfotech.flooringmastery.dto.Order;
+import com.panesarinfotech.flooringmastery.dto.Product;
+import com.panesarinfotech.flooringmastery.dto.Tax;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,14 +42,36 @@ public class FlooringMasteryView {
         return io.readInt("***********************************", 1, 6);
     }
 
-    public Order newOrderInfo() {
+    public Order newOrderInfo(List<Product> productList, List<Tax> taxList ) {
         Order order = new Order();
         String customerName = io.readString("Please enter a name, allowed characters are [a-z] [0-9] as well as periods and comma's. ");
         order.setCustomerName(customerName);
-        String stateName = io.readString("Enter your states name here, abbreviations are accepted.");
-        order.setStateName(stateName);
-        String productType = io.readString("Enter the type of product you're looking to purchase");
-        order.setProductType(productType);
+        displayTaxList(taxList);
+            Boolean stateChoosen = true;
+             while(stateChoosen){
+                String stateName = io.readString("Enter your states name here, abbreviations are accepted.").toUpperCase();
+                if(containsStateName(taxList,stateName)){
+                    order.setStateName(stateName);
+                    stateChoosen = false;
+                }else{
+                    io.print("The STATE NAME you selected is not is the List. Please try again.");
+                    io.print(" ");
+                }
+            }
+         
+        displayProductList(productList);
+            Boolean productChoosen = true;
+             while(productChoosen){
+                String productType = io.readString("Enter the type of product you're looking to purchase");
+                if(containsProductName(productList,productType)){
+                    order.setProductType(productType);
+                    productChoosen = false;
+                }else{
+                    io.print("The PRODUCT NAME you selected is not is the List. Please try again.");
+                    io.print(" ");
+                }
+            }
+            
         BigDecimal area = io.readDecimal("Enter the area, minimum order size is 100 Sq Ft", new BigDecimal("100"));
         order.setArea(area);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
@@ -60,6 +89,52 @@ public class FlooringMasteryView {
         }
 //        System.out.print("ORDER DETAILS -  VIEW : " +order.getCustomerName()+order.getOrderDate()+order.getProductType()+order.getStateName());
         return order;
+    }
+    
+    public void displayProductList(List<Product> itemList) {
+        io.print("----------------------------");
+        int indexNum = 0;
+        for (Product currentItem : itemList) {
+            // Index number to count loops and show ITEM INDEX NUM in menu
+                indexNum++;
+         
+                    String itemInfo = String.format(" %s >> %s : Cost= %s",
+                            indexNum,
+                            currentItem.getProductName(),
+//                            currentItem.getLabourCostPerSqFt(),
+                            currentItem.getCostPerSqFt()
+                            
+                      );
+                      io.print(itemInfo);
+   
+        }
+        io.print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+    } 
+    public void displayTaxList(List<Tax> itemList) {
+        io.print("-----------------------");
+        int indexNum = 0;
+        for (Tax currentItem : itemList) {
+            // Index number to count loops and show ITEM INDEX NUM in menu
+                indexNum++;
+         
+                    String itemInfo = String.format("  %s >> %s : Tax= %s",
+                            indexNum,
+                            currentItem.getStateAb(),
+//                            currentItem.getLabourCostPerSqFt(),
+                            currentItem.getTaxRate()
+                            
+                      );
+                      io.print(itemInfo);
+   
+        }
+        io.print("^^^^^^^^^^^^^^^^^^^^^^^");
+    } 
+    
+    public boolean containsStateName(final List<Tax> list, final String name){
+        return list.stream().filter(o -> o.getStateAb().equals(name)).findFirst().isPresent();
+    }
+    public boolean containsProductName(final List<Product> list, final String name){
+        return list.stream().filter(o -> o.getProductName().equals(name)).findFirst().isPresent();
     }
 
     public String listOfOrdersByDatePrompt() {
@@ -118,10 +193,10 @@ public class FlooringMasteryView {
     }
 
     public void genericSuccessBanner() {
-        io.print(".");
-        io.print(".");
-        io.print(".");
-        io.print("... Success!");
+        io.print("--");
+        io.print("----");
+        io.print("-------");
+        io.print("---------->> Success!");
     }
 
     public String removeOrderGenericString() {

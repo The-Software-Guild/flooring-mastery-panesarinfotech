@@ -13,6 +13,8 @@ import com.panesarinfotech.flooringmastery.dao.FlooringMasteryInvalidStateNameEx
 import com.panesarinfotech.flooringmastery.dao.FlooringMasteryNoOrderException;
 import com.panesarinfotech.flooringmastery.dao.FlooringMasteryPersistenceException;
 import com.panesarinfotech.flooringmastery.dto.Order;
+import com.panesarinfotech.flooringmastery.dto.Product;
+import com.panesarinfotech.flooringmastery.dto.Tax;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -23,7 +25,10 @@ import java.util.List;
  * @author panesar
  */
 public interface FlooringMasteryService {
-
+    
+    
+    List<Product> getProductList();
+    List<Tax> getTaxList();
     // Generic methods for writing to, updating or grabbing objects from memory
     List<Order> displayOrdersByDate(String date) throws FlooringMasteryNoOrderException, FlooringMasteryPersistenceException,
             FlooringMasteryInvalidDateException;

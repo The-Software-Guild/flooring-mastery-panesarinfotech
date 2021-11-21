@@ -205,8 +205,8 @@ public class FlooringMasteryServiceImplTest {
 
         assertEquals(testOrder, removed, "These two are one and the same");
     }
-
-    //@Test // Delete all files before running this method. Also Clean and Build, just incase
+//////
+//    @Test 
     public void testGetAllOrders() throws FlooringMasteryPersistenceException, FlooringMasteryNoOrderException, FlooringMasteryInvalidDateException,
             IOException, FlooringMasteryInvalidAreaInputException, FlooringMasteryInvalidStateNameException,
             FlooringMasteryInvalidProductNameException, FlooringMasteryInvalidCustomerNameException {

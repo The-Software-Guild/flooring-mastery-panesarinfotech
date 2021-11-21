@@ -45,8 +45,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> displayProduct() 
-            throws FlooringMasteryPersistenceException {
+    public List<Product> displayProduct() throws FlooringMasteryPersistenceException {
         loadFile();
         return new ArrayList<>(product.values());
     }
